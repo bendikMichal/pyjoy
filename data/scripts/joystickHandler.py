@@ -35,11 +35,15 @@ def GenerateJoyObj(setup_location):
     return joybuttons
 
 def Event(event, joysticks, joybuttons, joydirectV, joydirectH):
+    added, removed = False, False
+    
     if event.type == pygame.JOYDEVICEADDED:
         joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+        added = True
 
     if event.type == pygame.JOYDEVICEREMOVED:
         joysticks.pop(-1)
+        removed = True
 
     if event.type == JOYHATMOTION:
         button_id = -1
@@ -78,4 +82,4 @@ def Event(event, joysticks, joybuttons, joydirectV, joydirectH):
             if joybuttons[key]["type"] == "joystick":  
                 joybuttons[key]["is"] = False
     
-    return joysticks, joybuttons, joydirectV, joydirectH
+    return joysticks, joybuttons, joydirectV, joydirectH, added, removed
