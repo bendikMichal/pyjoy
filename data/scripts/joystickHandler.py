@@ -39,7 +39,7 @@ def Event(event, joysticks, joybuttons, joydirectV, joydirectH):
         joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
 
     if event.type == pygame.JOYDEVICEREMOVED:
-        del joysticks[event.instance_id]
+        joysticks.pop(-1)
 
     if event.type == JOYHATMOTION:
         button_id = -1
