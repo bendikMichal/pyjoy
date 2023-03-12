@@ -9,14 +9,14 @@ def GenerateJoyObj(setup_location):
     joyfile.close()
 
     joybuttons = {
-        0 : {"id" : 0, "name" : "a", "type" : "button", "is" : False},
-        1 : {"id" : 0, "name" : "b", "type" : "button", "is" : False},
-        2 : {"id" : 0, "name" : "y", "type" : "button", "is" : False},
-        3 : {"id" : 0, "name" : "x", "type" : "button", "is" : False},
-        4 : {"id" : 0, "name" : "r1", "type" : "button", "is" : False},
-        5 : {"id" : 0, "name" : "l1", "type" : "button", "is" : False},
-        6 : {"id" : 0, "name" : "select", "type" : "button", "is" : False},
-        7 : {"id" : 0, "name" : "start", "type" : "button", "is" : False},
+        0 : {"id" : 0, "name" : "a", "type" : "button", "is" : False, "variants": []},
+        1 : {"id" : 0, "name" : "b", "type" : "button", "is" : False, "variants": []},
+        2 : {"id" : 0, "name" : "y", "type" : "button", "is" : False, "variants": []},
+        3 : {"id" : 0, "name" : "x", "type" : "button", "is" : False, "variants": []},
+        4 : {"id" : 0, "name" : "r1", "type" : "button", "is" : False, "variants": []},
+        5 : {"id" : 0, "name" : "l1", "type" : "button", "is" : False, "variants": []},
+        6 : {"id" : 0, "name" : "select", "type" : "button", "is" : False, "variants": []},
+        7 : {"id" : 0, "name" : "start", "type" : "button", "is" : False, "variants": []},
         8 : {"id" : 0, "name" : "LEFT", "type" : "joystick", "is" : False},
         9 : {"id" : 0, "name" : "RIGHT", "type" : "joystick", "is" : False},
         10 : {"id" : 0, "name" : "LEFT", "type" : "pad", "is" : False},
@@ -65,6 +65,8 @@ def Event(event, joysticks, joybuttons, joydirectV, joydirectH):
         for key in joybuttons:
             if joybuttons[key]["id"] == event.button and joybuttons[key]["type"] == "button": 
                 joybuttons[key]["is"] = True
+                if not event.instance_id in joybuttons[key]["variants"]:
+                    joybuttons[key]["variants"].append(event.instance_id)
 
     if event.type == JOYAXISMOTION:
         if event.axis == 0:
