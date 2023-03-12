@@ -38,6 +38,12 @@ while 1:
     if joybuttons[0]["is"]: # a
         print("Player pressed a...")
     
+    # checking from multiple gamepads for input (NOTE: Not all buttons have multiple gamepad support)
+    if 0 in joybuttons[0]["variants"]:
+        print("Player 0 pressed a...")
+    if 1 in joybuttons[0]["variants"]:
+        print("Player 1 pressed a...")
+    
 
 
 ```
